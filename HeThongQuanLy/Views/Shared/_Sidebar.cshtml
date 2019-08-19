@@ -1,0 +1,78 @@
+﻿
+<div id="sidebar" class="sidebar responsive ace-save-state">
+    <script type="text/javascript">try { ace.settings.loadState('sidebar') } catch (e) { }</script>
+
+    <ul class="nav nav-list">
+        <li class="active" id="loaikhoahoc">
+            <a href="@Url.Content("~/User/Index")">
+                <i class="menu-icon fa fa-list"></i>
+                <span class="menu-text"> Trang chủ</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        @if (Session["GroupID"].ToString() == "1")
+        {
+            <li class="" id="khoahoc">
+                <a href="@Url.Content("~/QuanLy/Index")">
+                    <i class="menu-icon fa fa-user"></i>
+                    <span class="menu-text"> Quản lý</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        }
+        @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
+        {
+            <li class="" id="khoahoc">
+                <a href="@Url.Content("~/Admin/KhoaHoc/Index")">
+                    <i class="menu-icon fa fa-users"></i>
+                    <span class="menu-text"> Nhân viên</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        }
+        @if (Session["GroupID"].ToString() == "2")
+        {
+            <li class="" id="khoahoc">
+                <a href="@Url.Content("~/Admin/KhoaHoc/Index")">
+                    <i class="menu-icon fa fa-users"></i>
+                    <span class="menu-text"> Khách hàng</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        }
+        @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2" || Session["GroupID"].ToString() == "3")
+        {
+            <li class="" id="giangvien">
+                <a href="@Url.Content("~/Admin/GiangVien/Index")">
+                    <i class=" menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text">Dịch vụ</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        }
+        @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
+        {
+            <li class="" id="taikhoan">
+                <a href="@Url.Content("~/Admin/TaiKhoan/Index")">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text">Loại dịch vụ</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        }
+        @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
+        {
+            <li class="" id="taikhoan">
+                <a href="@Url.Content("~/Admin/TaiKhoan/Index")">
+                    <i class="menu-icon fa fa-file-text"></i>
+                    <span class="menu-text">Báo cáo</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        }
+
+    </ul>
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+</div>

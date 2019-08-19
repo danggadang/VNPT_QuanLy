@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = "";
+    ViewBag.Title = "Login";
+}
+@model  HeThongQuanLy.Models.LoginModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Admin/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @*@Html.ValidationSummary(false, "", new { @class = "text-danger" });*@
+                            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger", @role = "alert" })
+                            <fieldset>
+                                <div class="form-group">
+                                    @*@Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "User Name" })*@
+                                    <input class="form-control" name="userName" type="text" placeholder="Nhập tên đăng nhập" onblur="this.placeholder='Nhập tên đăng nhập'" onfocus="this.placeholder=''" /><br />
+                                </div>
+                                <div class="form-group">
+                                    @*@Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password" })*@
+                                    <input class="form-control" name="password" placeholder="Nhập mật khẩu" onblur="this.placeholder='Nhập mật khẩu'" type="password" onfocus="this.placeholder=''" /><br />
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="~/Content/admin/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/Admin/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
