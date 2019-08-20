@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Quản lý";
+    ViewBag.Title = "Khách hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,16 +9,17 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Bảng quản lý</h3>
+                    <h3 class="box-title">Bảng khách hàng</h3>
                 </div>
                 <div class="box-body">
                     <table id="dtable" class="table table-bordered table-striped" width="100%">
                         <thead>
                             <tr>
-                                <th>Tên quản lý</th>
+                                <th>Tên khách hàng</th>
+                                <th>Số điện thoại</th>
                                 <th>Mail</th>
-                                <th>Giới tính</th>
-                                <th>Ảnh</th>
+                                <th>Địa chỉ</th>
+                                <th>Nhân viên</th>
                                 <th><button type="button" onclick="fnShowModal('0')" class="btn btn-success">Thêm</button></th>
                             </tr>
                         </thead>
@@ -30,5 +31,5 @@
 </div>
 
 @section scripts{
-    <script src="~/Scripts/js_BackEnd/QuanLy.js"></script>
+    <script src="~/Scripts/js_BackEnd/KhachHang.js"></script>
 }

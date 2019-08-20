@@ -23,17 +23,17 @@
         @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
             <li class="" id="khoahoc">
-                <a href="@Url.Content("~/Admin/KhoaHoc/Index")">
+                <a href="@Url.Content("~/NhanVien/Index")">
                     <i class="menu-icon fa fa-users"></i>
                     <span class="menu-text"> Nhân viên</span>
                 </a>
                 <b class="arrow"></b>
             </li>
         }
-        @if (Session["GroupID"].ToString() == "2")
+        @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
             <li class="" id="khoahoc">
-                <a href="@Url.Content("~/Admin/KhoaHoc/Index")">
+                <a href="@Url.Content("~/KhachHang/Index")">
                     <i class="menu-icon fa fa-users"></i>
                     <span class="menu-text"> Khách hàng</span>
                 </a>

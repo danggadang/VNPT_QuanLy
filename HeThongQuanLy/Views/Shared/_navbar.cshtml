@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
         </button>
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="@Url.Content("~/Home/Index")" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     Admin
@@ -20,7 +20,7 @@
                 <li class="purple  dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <span class="user-info">
-                            <img class="nav-user-photo" src="~/Images/@Session["Anh"].ToString()" style="height:40px;width:45px;" />
+                            <img class="nav-user-photo" @*src="~/Images/@Session["Anh"].ToString()"*@ style="height:40px;width:45px;" />
                             <small>Welcome, </small>
                             <span>@Session["Name"]</span>
                         </span>

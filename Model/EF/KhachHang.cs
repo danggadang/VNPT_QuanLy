@@ -17,12 +17,12 @@ namespace Model.EF
         [StringLength(250)]
         public string DiaChi { get; set; }
 
-        public bool? GioiTinh { get; set; }
-
         [StringLength(250)]
-        public string SDT { get; set; }
+        public string SoDienThoai { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? NamSinh { get; set; }
+        [StringLength(200)]
+        public string Mail { get; set; }
+
+        public int IDNhanVien { get; set; }
     }
 }

@@ -6,13 +6,12 @@ using System.Web.Mvc;
 
 namespace HeThongQuanLy.Controllers
 {
-    public class HomeController : BaseController
+    public class HoaDonController : BaseController
     {
+        // GET: HoaDon
         public ActionResult Index()
         {
             return View();
         }
-
-        
     }
 }

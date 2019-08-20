@@ -5,11 +5,11 @@
         ajax: {
             dataType: 'json',
             type: 'get',//server side only works well with type "POST" !!!
-            url: '/QuanLy/LoadQuanLy',
+            url: '/NhanVien/LoadNhanVien',
         },
         columns: [
             { data: 'TenNV', name: 'TenNV' },
-            
+
             { data: 'Mail', name: 'Mail' },
             { data: 'GioiTinh', name: 'GioiTinh' },
             {
@@ -52,16 +52,16 @@ function Create() {
     data.append("GioiTinh", gioiTinh);
     debugger;
     $.ajax({
-        url: '/QuanLy/AddQuanLy',
+        url: '/NhanVien/AddNhanVien',
         type: 'POST',
         data: data,
         dataType: false,
         contentType: false,
         processData: false,
         success: function (data) {
-            swal("Thêm quản lý thành công!", "success");
+            swal("Thêm nhân viên thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
-            $('#AddandEditQuanLyModal').modal('hide');
+            $('#AddandEditNhanVienModal').modal('hide');
         },
         error: function (xhr, ajaxOptions, thrownError) {
             swal("Oh no!!", thrownError, "error");
@@ -81,16 +81,16 @@ function Edit() {
     data.append("GioiTinh", gioiTinh);
     debugger;
     $.ajax({
-        url: '/QuanLy/EditQuanLy',
+        url: '/NhanVien/EditNhanVien',
         type: 'POST',
         data: data,
         dataType: false,
         contentType: false,
         processData: false,
         success: function (data) {
-            swal("Sửa quản lý thành công!", "success");
+            swal("Sửa nhân viên thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
-            $('#AddandEditQuanLyModal').modal('hide');
+            $('#AddandEditNhanVienModal').modal('hide');
         },
         error: function (xhr, ajaxOptions, thrownError) {
             swal("Oh no!!", thrownError, "error");
@@ -99,12 +99,12 @@ function Edit() {
 }
 function Delete(id) {
     $.ajax({
-        url: '/QuanLy/DeleteQuanLy',
+        url: '/NhanVien/DeleteNhanVien',
         dataType: 'json',
         data: { id: id },
         type: 'POST',
         success: function (data) {
-            swal("Yes!!", "Xóa thành công!", "success")
+            swal("Yes!!", "Xóa nhân viên thành công!", "success")
             $('#dtable').DataTable().ajax.reload();
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -112,8 +112,8 @@ function Delete(id) {
         }
     });
 }
+
 function ReadImage(input) {
-    console.log('dadoc');
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -125,12 +125,12 @@ function ReadImage(input) {
 }
 function fnShowModal(id) {
     $.ajax({
-        url: '/QuanLy/AddandEditQuanLyModal',
+        url: '/NhanVien/AddandEditNhanVienModal',
         data: { id: id },
         type: 'POST',
         success: function (data) {
             $('#containershow1').html(data);
-            $('#AddandEditQuanLyModal').modal('show');
+            $('#AddandEditNhanVienModal').modal('show');
         }
     });
 }

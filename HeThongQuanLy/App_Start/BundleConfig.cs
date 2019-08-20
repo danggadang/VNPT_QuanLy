@@ -56,17 +56,17 @@ namespace HeThongQuanLy
                 "~/Content/Back_End/assets/js/jquery.maskedinput.min.js",
                 "~/Content/Back_End/assets/js/bootstrap-tag.min.js",
                 "~/Scripts/js_BackEnd/Form.js",
-                // Group 8 custom
+                // Custom
                 "~/Scripts/js_BackEnd/bootbox/bootbox.min.js",
                 "~/Scripts/js_BackEnd/Loading/src/js/jquery.preloader.min.js",
                 "~/Content/Back_End/assets/js/jquery.gritter.min.js",
                 "~/Scripts/js_BackEnd/ckeditor/ckeditor.js",
                 //"~/Scripts/js_BackEnd/ckeditor/ckeditor.js",
-                //ACE
                 "~/Content/Back_End/assets/js/ace-elements.min.js",
                 "~/Content/Back_End/assets/js/ace.min.js"
+                
+                ));
 
-            ));
         }
     }
 }

@@ -5,18 +5,15 @@
         ajax: {
             dataType: 'json',
             type: 'get',//server side only works well with type "POST" !!!
-            url: '/QuanLy/LoadQuanLy',
+            url: '/KhachHang/LoadKhachHang',
         },
         columns: [
-            { data: 'TenNV', name: 'TenNV' },
-            
-            { data: 'Mail', name: 'Mail' },
-            { data: 'GioiTinh', name: 'GioiTinh' },
-            {
-                data: 'Anh', render: function (data) {
-                    return ` <img src="../../Images/${data}" style="width:100px; height:100px"/>`;
-                }
-            },
+            { data: 'TenKH'},
+
+            { data: 'SoDienThoai' },
+            { data: 'Mail' },
+            { data: 'DiaChi' },
+            { data: 'IDNhanVien' },
             {
                 data: 'ID', render: function (data) {
                     return `
@@ -52,7 +49,7 @@ function Create() {
     data.append("GioiTinh", gioiTinh);
     debugger;
     $.ajax({
-        url: '/QuanLy/AddQuanLy',
+        url: '/KhachHang/AddKhachHang',
         type: 'POST',
         data: data,
         dataType: false,
@@ -61,7 +58,7 @@ function Create() {
         success: function (data) {
             swal("Thêm quản lý thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
-            $('#AddandEditQuanLyModal').modal('hide');
+            $('#AddandEditKhachHangModal').modal('hide');
         },
         error: function (xhr, ajaxOptions, thrownError) {
             swal("Oh no!!", thrownError, "error");
@@ -81,7 +78,7 @@ function Edit() {
     data.append("GioiTinh", gioiTinh);
     debugger;
     $.ajax({
-        url: '/QuanLy/EditQuanLy',
+        url: '/KhachHang/EditKhachHang',
         type: 'POST',
         data: data,
         dataType: false,
@@ -90,7 +87,7 @@ function Edit() {
         success: function (data) {
             swal("Sửa quản lý thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
-            $('#AddandEditQuanLyModal').modal('hide');
+            $('#AddandEditKhachHangModal').modal('hide');
         },
         error: function (xhr, ajaxOptions, thrownError) {
             swal("Oh no!!", thrownError, "error");
@@ -99,7 +96,7 @@ function Edit() {
 }
 function Delete(id) {
     $.ajax({
-        url: '/QuanLy/DeleteQuanLy',
+        url: '/KhachHang/DeleteKhachHang',
         dataType: 'json',
         data: { id: id },
         type: 'POST',
@@ -112,25 +109,29 @@ function Delete(id) {
         }
     });
 }
-function ReadImage(input) {
-    console.log('dadoc');
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+function LoadNhanVienGroup() {
 
-        reader.onload = function (e) {
-            $('#image').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
+    $.ajax({
+        url: '/KhachHang/LoadNhanVienGroup',
+        type: 'GET',
+        success: function (data) {
+
+            html = "";
+            $.each(data.data, function (i, row) {
+                html += "<option value=" + row.ID + ">" + row.Name + "</option>";
+            });
+            $('#iCartegory').html(html);
+        }
+    });
 }
 function fnShowModal(id) {
     $.ajax({
-        url: '/QuanLy/AddandEditQuanLyModal',
+        url: '/KhachHang/AddandEditKhachHangModal',
         data: { id: id },
         type: 'POST',
         success: function (data) {
             $('#containershow1').html(data);
-            $('#AddandEditQuanLyModal').modal('show');
+            $('#AddandEditKhachHangModal').modal('show');
         }
     });
 }

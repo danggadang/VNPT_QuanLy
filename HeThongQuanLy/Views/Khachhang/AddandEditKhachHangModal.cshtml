@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+    var obj = ViewData["Obj"] as Model.EF.KhachHang;
+    var mode = ViewData["Mode"];
+}
+
+<div id="AddandEditKhachHangModal" class="modal fade">
+    <div class="modal-dialog modal-lg" id="m1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><b>Thông tin khóa học</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="frmAddEdit">
+                    <input type="hidden" name="mode" id="mode" value="@ViewData["Mode"]" />
+                    <div class="form-group">
+                        <input class="form-control" id="iID" type="hidden" value="@obj.ID">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên đăng nhập</label>
+                        <input type="text" class="form-control" id="iUserName" value="@obj.TenKH">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input type="text" class="form-control" id="iPassword" value="@obj.SoDienThoai">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên nhân viên</label>
+                        <input type="text" class="form-control" id="iName" value="@obj.DiaChi">
+                    </div>
+                    <div class="form-group">
+                        <label>Mail</label>
+                        <input type="text" class="form-control" id="iMail" value="@obj.Mail">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="bt" type="button" class="btn btn-success" onclick="Save(@obj.ID)">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/js_BackEnd/KhachHang.js"></script>
+
+}
+
+
+
+

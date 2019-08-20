@@ -8,62 +8,76 @@ using Model.EF;
 
 namespace HeThongQuanLy.Controllers
 {
-    public class NhanVienController : Controller
+    public class NhanVienController : BaseController
     {
         HeThong db = new HeThong();
         public ActionResult Index()
         {
             return View();
         }
-        [HttpPost, ValidateInput(false)]
-        public JsonResult AddQuanLy()
+        [HttpGet]
+        public JsonResult LoadNhanVien()
         {
-            var userName = Request.Form["userName"].ToString();
-            var pass = Request.Form["pass"].ToString();
-            var gioiTinh = Request.Form["gioiTinh"].ToString();
+            var ds = db.NhanViens.Where(x => x.IDNhom == 3).ToList();
+            return Json(new { data = ds }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost, ValidateInput(false)]
+        public JsonResult AddNhanVien()
+        {
+            var userName = Request.Form["TenDangNhap"].ToString();
+            var pass = Request.Form["MatKhau"].ToString();
             var name = Request.Form["Ten"].ToString();
-            var gia = Request.Form["Gia"].ToString();
+            var mail = Request.Form["Mail"].ToString();
+            var gioiTinh = Request.Form["GioiTinh"].ToString();
             var countform = Request.Form.Count;
             var countfile = Request.Files.Count;
             var anh = Request.Files["Anh"];
-            var path = Path.Combine(Server.MapPath("~/Image"), anh.FileName);
+            var path = Path.Combine(Server.MapPath("~/Images"), anh.FileName);
             anh.SaveAs(path);
+
             NhanVien nv = new NhanVien();
             nv.TenDangNhap = userName;
             nv.MatKhau = pass;
             nv.TenNV = name;
-            nv.Anh = anh.FileName;
+            nv.Mail = mail;
             nv.GioiTinh = gioiTinh;
-            nv.IDNhom = 2;
+            nv.Anh = anh.FileName;
+            nv.IDNhom = 3;
             nv.NgayTao = DateTime.Now;
+
             db.NhanViens.Add(nv);
             db.SaveChanges();
             return Json(new { data = true });
         }
-        //[HttpPost, ValidateInput(false)]
-        //public JsonResult EditQuanLy()
-        //{
-        //    var countform = Request.Form.Count;
-        //    var countfile = Request.Files.Count;
-        //    var name = Request.Form["Ten"].ToString();
-        //    var gia = Request.Form["Gia"].ToString();
-        //    var anh = Request.Files["Anh"];
-        //    var motaRaw = Request.Form["Mota"];
-        //    var mota = HttpUtility.UrlDecode(motaRaw);
-        //    var path = Path.Combine(Server.MapPath("~/Image"), anh.FileName);
-        //    var id = int.Parse(Request.Form["ID"]);
-        //    anh.SaveAs(path);
+        [HttpPost, ValidateInput(false)]
+        public JsonResult EditNhanVien()
+        {
+            var id = int.Parse(Request.Form["ID"].ToString());
+            var userName = Request.Form["TenDangNhap"].ToString();
+            var pass = Request.Form["MatKhau"].ToString();
+            var name = Request.Form["Ten"].ToString();
+            var mail = Request.Form["Mail"].ToString();
+            var gioiTinh = Request.Form["GioiTinh"].ToString();
+            var countform = Request.Form.Count;
+            var countfile = Request.Files.Count;
+            var anh = Request.Files["Anh"];
+            var path = Path.Combine(Server.MapPath("~/Images"), anh.FileName);
+            anh.SaveAs(path);
 
-        //    Course course = db.Courses.Single(x => x.ID == id);
-        //    course.Name = name;
-        //    course.Image = anh.FileName;
-        //    course.Price = decimal.Parse(gia);
+            NhanVien nv = db.NhanViens.Single(x => x.ID == id);
+            nv.TenDangNhap = userName;
+            nv.MatKhau = pass;
+            nv.TenNV = name;
+            nv.Mail = mail;
+            nv.GioiTinh = gioiTinh;
+            nv.Anh = anh.FileName;
+            nv.IDNhom = 3;
+            nv.NgaySua = DateTime.Now;
 
-        //    course.Description = mota;
-        //    db.SaveChanges();
-        //    return Json(new { data = true });
-        //}
-        public JsonResult DeleteQuanLy(int id)
+            db.SaveChanges();
+            return Json(new { data = true });
+        }
+        public JsonResult DeleteNhanVien(int id)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +89,7 @@ namespace HeThongQuanLy.Controllers
             else
                 return Json(new { data = false });
         }
-        public ActionResult AddandEditQuanLyModal(int id)
+        public ActionResult AddandEditNhanVienModal(int id)
         {
             var result = new NhanVien();
             string mode = "Add";

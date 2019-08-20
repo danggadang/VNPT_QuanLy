@@ -8,7 +8,7 @@ using Model.EF;
 
 namespace HeThongQuanLy.Controllers
 {
-    public class SanPhamController : Controller
+    public class SanPhamController : BaseController
     {
         HeThong db = new HeThong();
         public ActionResult Index()
