@@ -23,6 +23,8 @@ namespace Model.EF
         [StringLength(200)]
         public string Mail { get; set; }
 
-        public int IDNhanVien { get; set; }
+        public DateTime? NgayTao { get; set; }
+
+        public DateTime? NgaySua { get; set; }
     }
 }

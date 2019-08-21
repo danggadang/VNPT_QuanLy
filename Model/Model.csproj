@@ -57,6 +57,7 @@
     <Compile Include="EF\HoaDon.cs" />
     <Compile Include="EF\KhachHang.cs" />
     <Compile Include="EF\NhanVien.cs" />
+    <Compile Include="EF\NhanVien_KhachHang.cs" />
     <Compile Include="EF\Nhom.cs" />
     <Compile Include="EF\NhomDV.cs" />
     <Compile Include="EF\sysdiagram.cs" />

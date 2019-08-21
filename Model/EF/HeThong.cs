@@ -18,6 +18,7 @@ namespace Model.EF
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
+        public virtual DbSet<NhanVien_KhachHang> NhanVien_KhachHang { get; set; }
         public virtual DbSet<Nhom> Nhoms { get; set; }
         public virtual DbSet<NhomDV> NhomDVs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }

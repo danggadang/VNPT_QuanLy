@@ -15,7 +15,7 @@ namespace HeThongQuanLy.Controllers
         {
             return View();
         }
-        [HttpGet]
+        [HttpPost]
         public JsonResult LoadKhachHang()
         {
             var ds = db.KhachHangs.ToList();
@@ -24,33 +24,41 @@ namespace HeThongQuanLy.Controllers
         [HttpPost, ValidateInput(false)]
         public JsonResult AddKhachHang()
         {
-            //var userName = Request.Form["TenDangNhap"].ToString();
-            //var pass = Request.Form["MatKhau"].ToString();
-            //var name = Request.Form["Ten"].ToString();
-            //var mail = Request.Form["Mail"].ToString();
-            //var gioiTinh = Request.Form["GioiTinh"].ToString();
-            //var countform = Request.Form.Count;
-            //var countfile = Request.Files.Count;
-            //var anh = Request.Files["Anh"];
-            //var path = Path.Combine(Server.MapPath("~/Images"), anh.FileName);
-            //anh.SaveAs(path);
+            var name = Request.Form["TenKhachHang"].ToString();
+            var diachi = Request.Form["DiaChi"].ToString();
+            var soDienThoai = Request.Form["SoDienThoai"].ToString();
+            var mail = Request.Form["Mail"].ToString();
 
-            //KhachHang nv = new KhachHang();
-            //nv.TenDangNhap = userName;
-            //nv.MatKhau = pass;
-            //nv.TenNV = name;
-            //nv.Mail = mail;
-            //nv.GioiTinh = gioiTinh;
-            //nv.Anh = anh.FileName;
-            //nv.IDNhom = 3;
-            //nv.NgayTao = DateTime.Now;
+            KhachHang kh = new KhachHang();
+            kh.TenKH = name;
+            kh.DiaChi = diachi;
+            kh.SoDienThoai = soDienThoai;
+            kh.Mail = mail;
+            kh.NgayTao = DateTime.Now;
 
-            //db.KhachHangs.Add(nv);
-            //db.SaveChanges();
+            db.KhachHangs.Add(kh);
+            db.SaveChanges();
             return Json(new { data = true });
         }
         [HttpPost, ValidateInput(false)]
-        
+        public JsonResult EditKhachHang()
+        {
+            var id = int.Parse(Request.Form["ID"].ToString());
+            var name = Request.Form["TenKhachHang"].ToString();
+            var diachi = Request.Form["DiaChi"].ToString();
+            var soDienThoai = Request.Form["SoDienThoai"].ToString();
+            var mail = Request.Form["Mail"].ToString();
+
+            KhachHang kh = db.KhachHangs.Single(x=>x.ID==id);
+            kh.TenKH = name;
+            kh.DiaChi = diachi;
+            kh.SoDienThoai = soDienThoai;
+            kh.Mail = mail;
+            kh.NgaySua = DateTime.Now;
+
+            db.SaveChanges();
+            return Json(new { data = true });
+        }
         public JsonResult DeleteKhachHang(int id)
         {
             if (ModelState.IsValid)
@@ -66,7 +74,7 @@ namespace HeThongQuanLy.Controllers
         [HttpGet]
         public JsonResult LoadNhanVienGroup()
         {
-            return Json(new { data = db.N.ToList() }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = db.NhanViens.ToList() }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult AddandEditKhachHangModal(int id)
         {

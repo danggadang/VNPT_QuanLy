@@ -4,16 +4,14 @@
     $("#dtable").DataTable({
         ajax: {
             dataType: 'json',
-            type: 'get',//server side only works well with type "POST" !!!
+            type: 'post',//server side only works well with type "POST" !!!
             url: '/KhachHang/LoadKhachHang',
         },
         columns: [
             { data: 'TenKH'},
-
             { data: 'SoDienThoai' },
             { data: 'Mail' },
             { data: 'DiaChi' },
-            { data: 'IDNhanVien' },
             {
                 data: 'ID', render: function (data) {
                     return `
@@ -37,16 +35,11 @@ function Save(id) {
     }
 }
 function Create() {
-    var gioiTinh = $('input[name=rdGioiTinh]:checked', '#frmAddEdit').val();
-    console.log(gioiTinh);
     var data = new FormData();
-    var files = $("#iImage").get(0).files;
-    data.append("Anh", files[0]);
-    data.append("TenDangNhap", $('#iUserName').val());
-    data.append("MatKhau", $('#iPassword').val());
-    data.append("Ten", $('#iName').val());
+    data.append("TenKhachHang", $('#iName').val());
+    data.append("DiaChi", $('#iDiaChi').val());
+    data.append("SoDienThoai", $('#iSoDienThoai').val());
     data.append("Mail", $('#iMail').val());
-    data.append("GioiTinh", gioiTinh);
     debugger;
     $.ajax({
         url: '/KhachHang/AddKhachHang',
@@ -56,7 +49,7 @@ function Create() {
         contentType: false,
         processData: false,
         success: function (data) {
-            swal("Thêm quản lý thành công!", "success");
+            swal("Thêm khách hàng thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
             $('#AddandEditKhachHangModal').modal('hide');
         },
@@ -66,17 +59,12 @@ function Create() {
     });
 }
 function Edit() {
-    var gioiTinh = $('input[name=rdGioiTinh]:checked', '#frmAddEdit').val();
     var data = new FormData();
-    var files = $("#iImage").get(0).files;
-    data.append("Anh", files[0]);
     data.append("ID", $('#iID').val());
-    data.append("TenDangNhap", $('#iUserName').val());
-    data.append("MatKhau", $('#iPassword').val());
-    data.append("Ten", $('#iName').val());
+    data.append("TenKhachHang", $('#iName').val());
+    data.append("DiaChi", $('#iDiaChi').val());
+    data.append("SoDienThoai", $('#iSoDienThoai').val());
     data.append("Mail", $('#iMail').val());
-    data.append("GioiTinh", gioiTinh);
-    debugger;
     $.ajax({
         url: '/KhachHang/EditKhachHang',
         type: 'POST',
@@ -85,7 +73,7 @@ function Edit() {
         contentType: false,
         processData: false,
         success: function (data) {
-            swal("Sửa quản lý thành công!", "success");
+            swal("Sửa khách hàng thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
             $('#AddandEditKhachHangModal').modal('hide');
         },
