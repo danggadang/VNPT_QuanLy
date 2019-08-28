@@ -7,11 +7,21 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     @Styles.Render("~/Content/css")
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <style>
 
         * {
             font-family: Arial;
         }
+
+        .toggle.ios, .toggle-on.ios, .toggle-off.ios {
+            border-radius: 20px;
+        }
+
+        .toggle.ios .toggle-handle {
+            border-radius: 20px;
+        }
+
     </style>
 </head>
 <body class="skin-2">
@@ -40,6 +50,7 @@
                         </div>
                     </div>
                     <div id="containershow1"></div>
+                    <div id="cc"></div>
                 </div>
             </div>
         </div>
@@ -50,6 +61,7 @@
 
     @Scripts.Render("~/Content/scripts")
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     @RenderSection("scripts", required: false)
     <script>
         $(document).ready(function () {

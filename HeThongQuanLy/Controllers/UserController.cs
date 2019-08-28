@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Model.EF;
-using HeThongQuanLy.Common;
 
 namespace HeThongQuanLy.Controllers
 {
@@ -13,99 +12,37 @@ namespace HeThongQuanLy.Controllers
         HeThong db = new HeThong();
         public ActionResult Index()
         {
-            //if (Session["GroupID"].ToString() != "1" || Session["GroupID"].ToString() != "2" || Session["GroupID"].ToString() != "3")
-            //{
-            //    Response.StatusCode = 404;
-            //    return null;
-            //}
             return View();
         }
-        public JsonResult GetUserList()
+        public ActionResult ShowInfo(int id)
         {
-            var listUser = db.NhanViens.ToList();
-            return Json(new { data = listUser });
+            var info = db.NhanViens.Single(x => x.ID == id);
+            ViewData["info"] = info;
+            return View();
+        }       
+        public ActionResult EditModal(int id)
+        {
+            var info = db.NhanViens.Single(x => x.ID == id);
+            ViewData["Info"] = info;
+            return View();
+        }
+        [HttpPost, ValidateInput(false)]
+        public JsonResult Edit()
+        {
+            var id = int.Parse(Request.Form["ID"].ToString());
+            var name = Request.Form["Ten"].ToString();
+            var mail = Request.Form["Mail"].ToString();
+            var gioiTinh = Request.Form["GioiTinh"].ToString();
+
+            NhanVien nv = db.NhanViens.Single(x => x.ID == id);
+            nv.TenNV = name;
+            nv.Mail = mail;
+            nv.GioiTinh = gioiTinh;
+
+            nv.NgaySua = DateTime.Now;
+            db.SaveChanges();
+            return Json(new { data = true });
         }
 
-        //public JsonResult AddUser(string userN, string pass, string name, string email)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-                //NhanVien user = new User();
-                //user.UserName = userN;
-                //user.Password = pass;
-                //user.Name = name;
-                //user.Email = email;
-                //user.GroupID = "1";
-                //user.Status = true;
-                //db.NhanViens.Add(user);
-                //db.SaveChanges();
-                //return Json(new { data = true });
-        //    }
-        //    else
-        //    {
-        //        return Json(new { data = true });
-        //    }
-        //}
-        //public JsonResult EditUser(int id, string userN, string pass, string name, string email, string group)
-        //{
-            //if (ModelState.IsValid)
-            //{
-            //    NhanVien user = db.NhanViens.Single(x => x.ID == id);
-            //    user.UserName = userN;
-            //    user.Password = pass;
-            //    user.Name = name;
-            //    user.Email = email;
-            //    user.GroupID = group;
-            //    user.Status = true;
-            //    try
-            //    {
-            //        db.SaveChanges();
-            //        return Json(new { data = true });
-            //    }
-            //    catch (Exception)
-            //    {
-            //        return Json(new { data = false });
-            //    }
-            //}
-            //else
-            //{
-            //    return Json(new { data = true });
-            //}
-        //}
-        public JsonResult DeleteUser(int id)
-        {
-            NhanVien hs = db.NhanViens.Single(x => x.ID == id);
-            if (hs != null)
-            {
-                db.NhanViens.Remove(hs);
-                db.SaveChanges();
-                return Json(new { data = true });
-            }
-            else
-                return Json(new { data = false });
-        }
-        public ActionResult AddandEditUserModal(int id)
-        {
-            NhanVien result = new NhanVien();
-            string mode = "Add";
-            result = db.NhanViens.FirstOrDefault(x => x.ID == id);
-            if (result == null)
-            {
-                mode = "Add";
-                result = new NhanVien();
-            }
-            else
-            {
-                mode = "Edit";
-            }
-            ViewData["Mode"] = mode;
-            ViewData["Obj"] = result;
-            return View();
-        }
-        [HttpGet]
-        public JsonResult LoadGroup()
-        {
-            return Json(new { data = db.Nhoms.ToList() }, JsonRequestBehavior.AllowGet);
-        }
     }
 }

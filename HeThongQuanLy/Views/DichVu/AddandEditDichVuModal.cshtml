@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+    var obj = ViewData["Obj"] as Model.EF.DichVu;
+    var mode = ViewData["Mode"];
+}
+
+<div id="AddandEditDichVuModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><b>Thông tin nhân viên</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="frmAddEdit">
+                    <input type="hidden" name="mode" id="mode" value="@ViewData["Mode"]" />
+                    <div class="form-group">
+                        <input class="form-control" id="iID" type="hidden" value="@obj.ID">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên dịch vụ</label>
+                        <input type="text" class="form-control" id="iTenDichVu" value="@obj.TenDV">
+                    </div>
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        @if (obj.TrangThai == true)
+                        {
+                            <input type="checkbox" id="tTrangThai" checked data-toggle="toggle" data-class="fast" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="ios" data-on="True" data-off="False">
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="tTrangThai" data-toggle="toggle" data-class="fast" value="FALSE" data-onstyle="success" data-offstyle="danger" data-size="small" data-style="ios" data-on="True" data-off="False">
+                        }
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button id="bt" type="button" class="btn btn-success" onclick="Save(@obj.ID)">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/js_BackEnd/DichVu.js"></script>
+
+}
+
+
+
+
+

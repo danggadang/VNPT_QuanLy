@@ -9,8 +9,7 @@ namespace Model.EF
     [Table("DichVu")]
     public partial class DichVu
     {
-        [StringLength(250)]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [StringLength(250)]
@@ -19,6 +18,10 @@ namespace Model.EF
         [StringLength(250)]
         public string IDNhomDV { get; set; }
 
-        public bool? DaXoa { get; set; }
+        public bool? TrangThai { get; set; }
+
+        public DateTime? NgayTao { get; set; }
+
+        public DateTime? NgaySua { get; set; }
     }
 }

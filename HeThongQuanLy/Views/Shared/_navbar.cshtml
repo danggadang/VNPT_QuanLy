@@ -19,8 +19,10 @@
                 
                 <li class="purple  dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <small>Welcome, </small>
+                            <span>@Session["Name"]</span>
                         <span class="user-info">
-                            <img class="nav-user-photo" @*src="~/Images/@Session["Anh"].ToString()"*@ style="height:40px;width:45px;" />
+                            <img class="nav-user-photo" src="~/Images/@Session["Anh"].ToString()" style="height:40px;width:40px;" />
                             <small>Welcome, </small>
                             <span>@Session["Name"]</span>
                         </span>
@@ -39,7 +41,7 @@
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 
                         <li>
-                            <a href="@Url.Action("Index","Info")">
+                            <a href="@Url.Content("~/User/ShowInfo?id="+Session["ID"]+"")">
                                 <i class="ace-icon fa fa-user"></i>
                                 Profile
                             </a>

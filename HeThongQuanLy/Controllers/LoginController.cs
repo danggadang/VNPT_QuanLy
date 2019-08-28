@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HeThongQuanLy.Models;
-using HeThongQuanLy.Common;
-using Model.EF;
 using System.Web.Security;
+using Model.EF;
 
 namespace HeThongQuanLy.Controllers
 {
@@ -35,7 +33,9 @@ namespace HeThongQuanLy.Controllers
                     //hinh = db.GiangViens.SingleOrDefault(z => z.IDTaiKhoan == taikhoan.ID).Anh;
                     //Session["Anh"] = hinh;
                     Session["GroupID"] = user.IDNhom;
+                    Session["ID"] = user.ID;                    ;
                     Session["Name"]=name;
+                    Session["Anh"] = user.Anh;
                     FormsAuthentication.SetAuthCookie(name, false);//?
                     return RedirectToAction("Index", "Home");
                 }

@@ -40,10 +40,10 @@
                 <b class="arrow"></b>
             </li>
         }
-        @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2" || Session["GroupID"].ToString() == "3")
+        @if (Session["GroupID"].ToString() == "1")
         {
             <li class="" id="giangvien">
-                <a href="@Url.Content("~/Admin/GiangVien/Index")">
+                <a href="@Url.Content("~/DichVu/Index")">
                     <i class=" menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Dịch vụ</span>
                 </a>
@@ -53,7 +53,7 @@
         @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
             <li class="" id="taikhoan">
-                <a href="@Url.Content("~/Admin/TaiKhoan/Index")">
+                <a href="@Url.Content("#")">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Loại dịch vụ</span>
                 </a>
@@ -63,7 +63,7 @@
         @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
             <li class="" id="taikhoan">
-                <a href="@Url.Content("~/Admin/TaiKhoan/Index")">
+                <a href="@Url.Content("#")">
                     <i class="menu-icon fa fa-file-text"></i>
                     <span class="menu-text">Báo cáo</span>
                 </a>

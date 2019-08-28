@@ -22,6 +22,7 @@ namespace Model.EF
         public virtual DbSet<Nhom> Nhoms { get; set; }
         public virtual DbSet<NhomDV> NhomDVs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<TrangThai> TrangThais { get; set; }
         public virtual DbSet<TrangThaiHopDong> TrangThaiHopDongs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

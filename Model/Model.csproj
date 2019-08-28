@@ -61,6 +61,7 @@
     <Compile Include="EF\Nhom.cs" />
     <Compile Include="EF\NhomDV.cs" />
     <Compile Include="EF\sysdiagram.cs" />
+    <Compile Include="EF\TrangThai.cs" />
     <Compile Include="EF\TrangThaiHopDong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

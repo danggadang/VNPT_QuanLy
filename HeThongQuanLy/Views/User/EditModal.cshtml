@@ -1,0 +1,40 @@
+﻿@{ 
+    var info = ViewData["Info"] as Model.EF.NhanVien;
+    Layout = null;
+}
+
+<div id="EditModal" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="float:left"><b>Sửa thông tin</b></h4>
+                
+            </div>
+            <div class="modal-body">
+                <form id="frmEdit">
+                    <div class="form-group">
+                        <input class="form-control" id="iID" type="hidden" value="">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên nhân viên</label>
+                        <input type="text" class="form-control" id="iName" value="@info.TenNV">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Giới Tính</label><br />
+                        <input type="radio" name="rdGioiTinh" value="Nam" @if (info.GioiTinh == "Nam") { ViewContext.Writer.Write("checked"); } />&nbsp;&nbsp; Nam &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="rdGioiTinh" value="Nu" @if (info.GioiTinh == "Nu") { ViewContext.Writer.Write("checked"); } />&nbsp;&nbsp; Nữ &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="rdGioiTinh" value="Khac" @if (info.GioiTinh == "Khac") { ViewContext.Writer.Write("checked"); } />&nbsp;&nbsp; Khác &nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="form-group">
+                        <label>Mail</label>
+                        <input type="text" class="form-control" id="iMail" value="@info.Mail">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="bt" type="button" class="btn btn-success" onclick="Edit(@info.ID)">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

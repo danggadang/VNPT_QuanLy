@@ -26,5 +26,10 @@ namespace Model.EF
         public DateTime? NgayTao { get; set; }
 
         public DateTime? NgaySua { get; set; }
+
+        [StringLength(100)]
+        public string TrangThai { get; set; }
+
+        public int? IDNhanVien { get; set; }
     }
 }

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var info = ViewData["info"] as Model.EF.NhanVien;
+    var id = Session["ID"];
+}
+
+<div style="float:left;margin-right:100px;margin-bottom:auto"><img src="~/Images/@info.Anh" width="200" height="200" style="border-style: hidden;" /></div>
+<div style="font-size:18px;float:left">
+    <p>Tên nhân viên: @info.TenNV</p>
+
+    @if (info.GioiTinh == "Nam")
+    {
+        <p>Giới tính: Nam</p>
+    }
+    else
+    {
+        <p>Giới tính: Nữ</p>
+    }
+
+    <p>Mail:@info.Mail</p><br />
+    <button type="button" class="btn btn-primary" onclick="ShowEditModal(@id)">Chỉnh sửa</button>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/js_BackEnd/User.js"></script>
+}
+

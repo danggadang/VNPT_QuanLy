@@ -50,7 +50,6 @@ function Create() {
     data.append("Ten", $('#iName').val());
     data.append("Mail", $('#iMail').val());
     data.append("GioiTinh", gioiTinh);
-    debugger;
     $.ajax({
         url: '/QuanLy/AddQuanLy',
         type: 'POST',
@@ -79,7 +78,6 @@ function Edit() {
     data.append("Ten", $('#iName').val());
     data.append("Mail", $('#iMail').val());
     data.append("GioiTinh", gioiTinh);
-    debugger;
     $.ajax({
         url: '/QuanLy/EditQuanLy',
         type: 'POST',

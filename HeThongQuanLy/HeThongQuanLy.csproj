@@ -57,6 +57,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -137,6 +139,7 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DichVuController.cs" />
     <Compile Include="Controllers\HoaDonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HopDongController.cs" />
@@ -145,7 +148,6 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\QuanLyController.cs" />
-    <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -341,6 +343,22 @@
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-toggle-master\.gitignore" />
+    <Content Include="Content\bootstrap-toggle-master\css\bootstrap-toggle.css" />
+    <Content Include="Content\bootstrap-toggle-master\css\bootstrap-toggle.min.css" />
+    <Content Include="Content\bootstrap-toggle-master\css\bootstrap2-toggle.css" />
+    <Content Include="Content\bootstrap-toggle-master\css\bootstrap2-toggle.min.css" />
+    <Content Include="Content\bootstrap-toggle-master\doc\header.png" />
+    <Content Include="Content\bootstrap-toggle-master\doc\nyt.png" />
+    <Content Include="Content\bootstrap-toggle-master\doc\nytdev.svg" />
+    <Content Include="Content\bootstrap-toggle-master\doc\script.js" />
+    <Content Include="Content\bootstrap-toggle-master\doc\stylesheet.css" />
+    <Content Include="Content\bootstrap-toggle-master\Gruntfile.js" />
+    <Content Include="Content\bootstrap-toggle-master\index.html" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.js" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.min.js" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.js" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -646,6 +664,12 @@
     <Content Include="Content\Admin\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Admin\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Admin\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\bootstrap-toggle-master\bower.json" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.min.js.map" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.min.js.map" />
+    <Content Include="Content\bootstrap-toggle-master\LICENSE" />
+    <Content Include="Content\bootstrap-toggle-master\package.json" />
+    <Content Include="Content\bootstrap-toggle-master\README.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -839,6 +863,7 @@
     <Content Include="Scripts\js_BackEnd\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Scripts\js_BackEnd\ckeditor\styles.js" />
     <Content Include="Scripts\js_BackEnd\dataTable.js" />
+    <Content Include="Scripts\js_BackEnd\DichVu.js" />
     <Content Include="Scripts\js_BackEnd\Form.js" />
     <Content Include="Scripts\js_BackEnd\KhachHang.js" />
     <Content Include="Scripts\js_BackEnd\Layout.js" />
@@ -852,6 +877,7 @@
     <Content Include="Scripts\js_BackEnd\Modal.js" />
     <Content Include="Scripts\js_BackEnd\NhanVien.js" />
     <Content Include="Scripts\js_BackEnd\QuanLy.js" />
+    <Content Include="Scripts\js_BackEnd\User.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -861,7 +887,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -877,7 +905,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\AddandEditUserModal.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_navbar.cshtml" />
     <Content Include="Views\Shared\_footer.cshtml" />
@@ -887,6 +914,11 @@
     <Content Include="Views\NhanVien\AddandEditNhanVienModal.cshtml" />
     <Content Include="Views\Khachhang\Index.cshtml" />
     <Content Include="Views\Khachhang\AddandEditKhachHangModal.cshtml" />
+    <Content Include="Views\User\ShowInfo.cshtml" />
+    <Content Include="Views\User\EditModal.cshtml" />
+    <Content Include="Views\DichVu\Index.cshtml" />
+    <Content Include="Views\DichVu\AddandEditDichVuModal.cshtml" />
+    <Content Include="Views\Khachhang\EditTrangThaiModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -938,6 +970,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

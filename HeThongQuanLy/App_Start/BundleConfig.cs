@@ -25,7 +25,10 @@ namespace HeThongQuanLy
                 "~/Content/Back_End/assets/css/ace-skins.min.css",
                 "~/Content/Back_End/assets/css/ace-rtl.min.css",
                 // Preload
-                "~/Scripts/js_BackEnd/Loading/src/css/preloader.css"
+                "~/Scripts/js_BackEnd/Loading/src/css/preloader.css",
+
+                "~/Content/bootstrap-toggle-master/css/bootstrap-toggle.min.css"
+
                 ));
             bundles.Add(new ScriptBundle("~/Content/scripts").Include(
                 "~/Content/Back_End/assets/js/jquery-2.1.4.min.js",
@@ -63,8 +66,8 @@ namespace HeThongQuanLy
                 "~/Scripts/js_BackEnd/ckeditor/ckeditor.js",
                 //"~/Scripts/js_BackEnd/ckeditor/ckeditor.js",
                 "~/Content/Back_End/assets/js/ace-elements.min.js",
-                "~/Content/Back_End/assets/js/ace.min.js"
-                
+                "~/Content/Back_End/assets/js/ace.min.js",
+                "~/Content/bootstrap-toggle-master/js/bootstrap-toggle.min.js"
                 ));
 
         }

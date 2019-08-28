@@ -15,11 +15,11 @@ namespace HeThongQuanLy.Controllers
         {
             return View();
         }
-        [HttpPost]
         public JsonResult LoadKhachHang()
         {
             var ds = db.KhachHangs.ToList();
-            return Json(new { data = ds }, JsonRequestBehavior.AllowGet);
+            var nv = db.NhanViens.Where(x => x.IDNhom == 3).ToList();
+            return Json(new { data = ds,data1= nv }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost, ValidateInput(false)]
         public JsonResult AddKhachHang()
@@ -35,7 +35,7 @@ namespace HeThongQuanLy.Controllers
             kh.SoDienThoai = soDienThoai;
             kh.Mail = mail;
             kh.NgayTao = DateTime.Now;
-
+            kh.TrangThai = "Tiếp nhận thông tin";
             db.KhachHangs.Add(kh);
             db.SaveChanges();
             return Json(new { data = true });
@@ -71,10 +71,25 @@ namespace HeThongQuanLy.Controllers
             else
                 return Json(new { data = false });
         }
+        public JsonResult SaveTrangThai()
+        {
+            return Json(new {  }, JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public JsonResult LoadNhanVienGroup()
         {
             return Json(new { data = db.NhanViens.ToList() }, JsonRequestBehavior.AllowGet);
+
+        }
+        [HttpGet]
+        public JsonResult EditTrangThaiModal(int id)
+        {
+            var tt = db.TrangThais.ToList();
+            List<object> list = new List<object>();
+            list.Add(tt);
+            list.Add(id);
+            list.Add(db.KhachHangs.SingleOrDefault(x=>x.ID==id).TrangThai);
+            return Json(new { data = list }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult AddandEditKhachHangModal(int id)
         {
