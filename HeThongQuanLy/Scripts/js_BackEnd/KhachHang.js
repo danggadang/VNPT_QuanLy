@@ -12,7 +12,12 @@
                             if (json.data1[j]["ID"] == json.data[i]["IDNhanVien"]) {
                                 json.data[i]["nhanvien"] = json.data1[j]["TenNV"];
                             }
-                        }
+                        } 
+                        for (var j = 0; j < json.data2.length; j++) {
+                            if (json.data2[j]["ID"] == json.data[i]["TrangThai"]) {
+                                json.data[i]["trangThai"] = json.data2[j]["TenTrangThai"];
+                            }
+                        } 
                     }
                     return json.data;
                 },
@@ -22,13 +27,8 @@
                 { data: 'SoDienThoai' },
                 { data: 'Mail' },
                 { data: 'DiaChi' },
+                { data: 'trangThai' },
                 {data:'nhanvien'},
-                //{
-                    
-                //    data:0,render: function (data) {
-                //        return data.ID;
-                //    }
-                //},
                 {
                     data: 'ID', render: function (data) {
                         return `
@@ -42,45 +42,7 @@
 
             ]
         });
-    //$.ajax({
-    //    url: '/KhachHang/LoadKhachHang',
-    //    type: 'get',
-    //    success: function (data) {
-    //        console.log(data.data1[0]["ID"]);
-    //    }
-    //});
 })
-
-function EditTrangThaiModal(id) {
-    $.ajax({
-        url: '/KhachHang/EditTrangThaiModal',
-        dataType: 'json',
-        data: { id: id },
-        type: 'get',
-        success: function (data) {
-            console.log(data);
-            var iddong = data.data[1];
-            var idtrangthai = data.data[2];
-            console.log(data);
-            $('#iIDTrangThai').val(data.data[1]);
-            var html = "";
-            $.each(data.data[0], function (i, row) {
-                if (row.ID == idtrangthai) {
-                    html += `<option value="` + row.ID + `" class="oTrangThai" selected>` + row.TenTrangThai + `</option>`;
-                }
-                else {
-                    html += `<option value="`+ row.ID + `" class="oTrangThai">` + row.TenTrangThai + `</option>`;
-                }
-                
-            })
-            $("#select").html(html);
-            $('#EditTrangThaiModal').modal('show');
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            swal("Oh no!!", thrownError, "error");
-        }
-    });
-}
 
 function fnShowModal(id) {
     $.ajax({
@@ -90,6 +52,30 @@ function fnShowModal(id) {
         success: function (data) {
             $('#containershow1').html(data);
             $('#AddandEditKhachHangModal').modal('show');
+            var id = $('#iID').val();
+            LoadNhanVien(id);
+        }
+    });
+}
+function LoadNhanVien(id) {
+    $.ajax({
+        url: '/KhachHang/LoadNhanVien',
+        type: 'get',
+        data: {id:id},
+        success: function (data) {
+            html = "";
+            debugger;
+            idNhanVien = data.data1;
+            $.each(data.data, function (i, row) {
+                if (row.ID == idNhanVien) {
+                    html += `<option value="` + row.ID + `" class="oNhanVien" selected>` + row.TenNV + `</option>`;
+                }
+                else {
+                    html += `<option value="` + row.ID + `" class="oNhanVien">` + row.TenNV + `</option>`;
+                }               
+            })    
+            
+            $('#sNhanVien').html(html);
         }
     });
 }
@@ -102,12 +88,13 @@ function Save(id) {
     }
 }
 function Create() {
+    idNhanVien = $("#sNhanVien option:selected").val();
     var data = new FormData();
     data.append("TenKhachHang", $('#iName').val());
     data.append("DiaChi", $('#iDiaChi').val());
     data.append("SoDienThoai", $('#iSoDienThoai').val());
     data.append("Mail", $('#iMail').val());
-    debugger;
+    data.append("idNhanVien", idNhanVien);
     $.ajax({
         url: '/KhachHang/AddKhachHang',
         type: 'POST',
@@ -126,12 +113,14 @@ function Create() {
     });
 }
 function Edit() {
+    idNhanVien = $("#sNhanVien option:selected").val();
     var data = new FormData();
     data.append("ID", $('#iID').val());
     data.append("TenKhachHang", $('#iName').val());
     data.append("DiaChi", $('#iDiaChi').val());
     data.append("SoDienThoai", $('#iSoDienThoai').val());
     data.append("Mail", $('#iMail').val());
+    data.append("idNhanVien", idNhanVien);
     $.ajax({
         url: '/KhachHang/EditKhachHang',
         type: 'POST',
@@ -161,6 +150,34 @@ function Delete(id) {
         },
         error: function (xhr, ajaxOptions, thrownError) {
             swal("Oh no!!", thrownError);
+        }
+    });
+}
+function EditTrangThaiModal(id) {
+    $.ajax({
+        url: '/KhachHang/EditTrangThaiModal',
+        dataType: 'json',
+        data: { id: id },
+        type: 'get',
+        success: function (data) {
+            var idtrangthai = data.data[2];
+            console.log(data);
+            $('#iIDTrangThai').val(data.data[1]);
+            var html = "";
+            $.each(data.data[0], function (i, row) {
+                if (row.ID == idtrangthai) {
+                    html += `<option value="` + row.ID + `" class="oTrangThai" selected>` + row.TenTrangThai + `</option>`;
+                }
+                else {
+                    html += `<option value="` + row.ID + `" class="oTrangThai">` + row.TenTrangThai + `</option>`;
+                }
+
+            })
+            $("#select").html(html);
+            $('#EditTrangThaiModal').modal('show');
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            swal("Oh no!!", thrownError, "error");
         }
     });
 }

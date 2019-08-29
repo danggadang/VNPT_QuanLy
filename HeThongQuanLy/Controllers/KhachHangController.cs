@@ -19,7 +19,8 @@ namespace HeThongQuanLy.Controllers
         {
             var ds = db.KhachHangs.ToList();
             var nv = db.NhanViens.Where(x => x.IDNhom == 3).ToList();
-            return Json(new { data = ds,data1= nv }, JsonRequestBehavior.AllowGet);
+            var tt = db.TrangThais.ToList();
+            return Json(new { data = ds,data1= nv, data2=tt }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost, ValidateInput(false)]
         public JsonResult AddKhachHang()
@@ -28,6 +29,7 @@ namespace HeThongQuanLy.Controllers
             var diachi = Request.Form["DiaChi"].ToString();
             var soDienThoai = Request.Form["SoDienThoai"].ToString();
             var mail = Request.Form["Mail"].ToString();
+            var idNhanVien= int.Parse(Request.Form["idNhanVien"].ToString());
 
             KhachHang kh = new KhachHang();
             kh.TenKH = name;
@@ -35,7 +37,9 @@ namespace HeThongQuanLy.Controllers
             kh.SoDienThoai = soDienThoai;
             kh.Mail = mail;
             kh.NgayTao = DateTime.Now;
-            kh.TrangThai = "Tiếp nhận thông tin";
+            kh.TrangThai = 1;
+            kh.IDNhanVien = idNhanVien;
+
             db.KhachHangs.Add(kh);
             db.SaveChanges();
             return Json(new { data = true });
@@ -48,6 +52,7 @@ namespace HeThongQuanLy.Controllers
             var diachi = Request.Form["DiaChi"].ToString();
             var soDienThoai = Request.Form["SoDienThoai"].ToString();
             var mail = Request.Form["Mail"].ToString();
+            var idNhanVien = int.Parse(Request.Form["idNhanVien"].ToString());
 
             KhachHang kh = db.KhachHangs.Single(x=>x.ID==id);
             kh.TenKH = name;
@@ -55,6 +60,7 @@ namespace HeThongQuanLy.Controllers
             kh.SoDienThoai = soDienThoai;
             kh.Mail = mail;
             kh.NgaySua = DateTime.Now;
+            kh.IDNhanVien = idNhanVien;
 
             db.SaveChanges();
             return Json(new { data = true });
@@ -75,12 +81,7 @@ namespace HeThongQuanLy.Controllers
         {
             return Json(new {  }, JsonRequestBehavior.AllowGet);
         }
-        [HttpGet]
-        public JsonResult LoadNhanVienGroup()
-        {
-            return Json(new { data = db.NhanViens.ToList() }, JsonRequestBehavior.AllowGet);
-
-        }
+        
         [HttpGet]
         public JsonResult EditTrangThaiModal(int id)
         {
@@ -108,6 +109,13 @@ namespace HeThongQuanLy.Controllers
             ViewData["Mode"] = mode;
             ViewData["Obj"] = result;
             return View();
+        }
+        public JsonResult LoadNhanVien(int id)
+        {
+            var list = db.NhanViens.Where(x => x.IDNhom == 3).ToList();
+            var iD = id;
+            return Json(new { data = list,data1=iD }, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

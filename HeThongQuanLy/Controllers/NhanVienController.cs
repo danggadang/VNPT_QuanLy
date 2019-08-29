@@ -53,6 +53,7 @@ namespace HeThongQuanLy.Controllers
         public JsonResult EditNhanVien()
         {
             var id = int.Parse(Request.Form["ID"].ToString());
+            NhanVien nv = db.NhanViens.Single(x => x.ID == id);
             var userName = Request.Form["TenDangNhap"].ToString();
             var pass = Request.Form["MatKhau"].ToString();
             var name = Request.Form["Ten"].ToString();
@@ -61,16 +62,18 @@ namespace HeThongQuanLy.Controllers
             var countform = Request.Form.Count;
             var countfile = Request.Files.Count;
             var anh = Request.Files["Anh"];
-            var path = Path.Combine(Server.MapPath("~/Images"), anh.FileName);
-            anh.SaveAs(path);
-
-            NhanVien nv = db.NhanViens.Single(x => x.ID == id);
+            if(anh!=null)
+            {
+                var path = Path.Combine(Server.MapPath("~/Images"), anh.FileName);
+                anh.SaveAs(path);
+                nv.Anh = anh.FileName;
+            }    
+            
             nv.TenDangNhap = userName;
             nv.MatKhau = pass;
             nv.TenNV = name;
             nv.Mail = mail;
-            nv.GioiTinh = gioiTinh;
-            nv.Anh = anh.FileName;
+            nv.GioiTinh = gioiTinh;          
             nv.IDNhom = 3;
             nv.NgaySua = DateTime.Now;
 
