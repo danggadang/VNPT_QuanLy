@@ -1,24 +1,20 @@
-﻿
-@{
-    ViewBag.Title = "Quản lý";
+﻿@{
+    ViewBag.Title = "Nhóm dịch vụ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="content">
+
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Bảng quản lý</h3>
+                    <h3 class="box-title">Bảng nhóm dịch vụ</h3>
                 </div>
                 <div class="box-body">
                     <table id="dtable" class="table table-bordered table-striped" width="100%">
                         <thead>
                             <tr>
-                                <th>Tên quản lý</th>
-                                <th>Mail</th>
-                                <th>Giới tính</th>
-                                <th>Ảnh</th>
+                                <th>Tên dịch vụ</th>
                                 <th><button type="button" onclick="fnShowModal('0')" class="btn btn-success">Thêm</button></th>
                             </tr>
                         </thead>
@@ -30,5 +26,7 @@
 </div>
 
 @section scripts{
-    <script src="~/Scripts/js_BackEnd/QuanLy.js"></script>
+    <script src="~/Scripts/js_BackEnd/DichVuGroup.js"></script>
 }
+
+

@@ -30,6 +30,8 @@
                 { data: 'trangThai' },
                 {data:'nhanvien'},
                 {
+                    'sortable': false,
+                    'searchable': false,
                     data: 'ID', render: function (data) {
                         return `
                                     <button class="btn btn-sm btn-primary" onclick="EditTrangThaiModal(${data})"> Trạng thái</button>
@@ -43,7 +45,13 @@
             ]
         });
 })
-
+function printData() {
+    var divToPrint = document.getElementById("test");
+    newWin = window.open("");
+    newWin.document.write(divToPrint.outerHTML);
+    newWin.print();
+    newWin.close();
+}
 function fnShowModal(id) {
     $.ajax({
         url: '/KhachHang/AddandEditKhachHangModal',

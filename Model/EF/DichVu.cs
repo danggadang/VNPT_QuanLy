@@ -15,8 +15,9 @@ namespace Model.EF
         [StringLength(250)]
         public string TenDV { get; set; }
 
-        [StringLength(250)]
-        public string IDNhomDV { get; set; }
+        public long? SoTien { get; set; }
+
+        public int? IDNhomDV { get; set; }
 
         public bool? TrangThai { get; set; }
 

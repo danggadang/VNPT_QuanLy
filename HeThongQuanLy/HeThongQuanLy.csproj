@@ -140,10 +140,8 @@
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DichVuController.cs" />
-    <Compile Include="Controllers\HoaDonController.cs" />
+    <Compile Include="Controllers\DichVuGroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HopDongController.cs" />
-    <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
@@ -864,6 +862,7 @@
     <Content Include="Scripts\js_BackEnd\ckeditor\styles.js" />
     <Content Include="Scripts\js_BackEnd\dataTable.js" />
     <Content Include="Scripts\js_BackEnd\DichVu.js" />
+    <Content Include="Scripts\js_BackEnd\DichVuGroup.js" />
     <Content Include="Scripts\js_BackEnd\Form.js" />
     <Content Include="Scripts\js_BackEnd\KhachHang.js" />
     <Content Include="Scripts\js_BackEnd\Layout.js" />
@@ -919,6 +918,8 @@
     <Content Include="Views\DichVu\Index.cshtml" />
     <Content Include="Views\DichVu\AddandEditDichVuModal.cshtml" />
     <Content Include="Views\Khachhang\EditTrangThaiModal.cshtml" />
+    <Content Include="Views\DichVuGroup\Index.cshtml" />
+    <Content Include="Views\DichVuGroup\AddandEditDichVuGroupModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

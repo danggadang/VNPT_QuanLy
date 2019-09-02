@@ -7,17 +7,26 @@
             dataType: 'json',
             type: 'get',
             url: '/DichVu/LoadDichVu',
+            dataSrc: function (json) {
+                for (var i = 0; i < json.data.length; i++) {
+                    for (var j = 0; j < json.data1.length; j++) {
+                        if (json.data1[j]["ID"] == json.data[i]["IDNhomDV"]) {
+                            json.data[i]["dichVu"] = json.data1[j]["TenNhom"];
+                        }                    
+                    }
+                }
+                return json.data;
+            }
         },
-        columnDefs: [
-            { targets: [0], visible: true },
-        ],
         columns: [
-            { data: 'TenDV', name: 'TenDV' 
-                //data: function (data, type, dataToSet)
-                //{
-                //    return `${data.TenDV}+${data.ID}`;
-                //} 
+            { data: 'TenDV' },
+            {
+                data: 'SoTien',
+                render: function (data) {
+                    return `<p>` + formatNumber(data, '.', ',') + ` VNĐ</p>`;
+                }
             },
+            {data:'dichVu'},
             {
                 'sortable': false,
                 'searchable': false,
@@ -31,6 +40,8 @@
 
             },
             {
+                'sortable': false,
+                'searchable': false,
                 data: 'ID', render: function (data) {
                     return `
 
@@ -41,9 +52,41 @@
                 }
             }
 
-        ],
+        ]
     });
 });
+function formatNumber(nStr, decSeperate, groupSeperate) {
+    nStr += '';
+    x = nStr.split(decSeperate);
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + groupSeperate + '$2');
+    }
+    return x1 + x2;
+}
+function LoadNhomDichVu(id) {
+    $.ajax({
+        url: '/DichVu/LoadNhomDichVu',
+        type: 'get',
+        data: { id: id },
+        success: function (data) {
+            html = "";
+            idNhomDichVu = data.data1;
+            $.each(data.data, function (i, row) {
+                if (row.ID == idNhomDichVu) {
+                    html += `<option value="` + row.ID + `" class="oNhanVien" selected>` + row.TenNhom + `</option>`;
+                }
+                else {
+                    html += `<option value="` + row.ID + `" class="oNhanVien">` + row.TenNhom + `</option>`;
+                }
+            })
+
+            $('#sNhomDichVu').html(html);
+        }
+    });
+}
 function Status(id) {
     $.ajax({
         url: "/DichVu/Status",
@@ -63,9 +106,12 @@ function Save(id) {
     }
 }
 function Create() {
-    
+    idNhanVien = $("#sNhomDichVu option:selected").val();
     var data = new FormData();  
     data.append("TenDichVu", $('#iTenDichVu').val());
+    data.append("SoTien", $('#iSoTien').val());
+    data.append("idNhomDichVu", idNhanVien);
+
     $.ajax({
         url: '/DichVu/AddDichVu',
         type: 'POST',
@@ -84,17 +130,13 @@ function Create() {
     });
 }
 function Edit() {
-    var trangThai;
-    if ($('#tTrangThai').is(":checked")) {
-        trangThai = 1;
-    }
-    else {
-        trangThai = 0;
-    }
+    idNhanVien = $("#sNhomDichVu option:selected").val();
     var data = new FormData();
     data.append("ID", $('#iID').val());
     data.append("TenDichVu", $('#iTenDichVu').val());
-    data.append("TrangThai", trangThai);
+    data.append("SoTien", $('#iSoTien').val());
+    data.append("idNhomDichVu", idNhanVien);
+
     $.ajax({
         url: '/DichVu/EditDichVu',
         type: 'POST',
@@ -103,7 +145,7 @@ function Edit() {
         contentType: false,
         processData: false,
         success: function (data) {
-            swal("Thêm thành công!", "success");
+            swal("Sửa thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
             $('#AddandEditDichVuModal').modal('hide');
         },
@@ -146,6 +188,8 @@ function fnShowModal(id) {
         success: function (data) {
             $('#containershow1').html(data);
             $('#AddandEditDichVuModal').modal('show');
+            var id = $('#iID').val();
+            LoadNhomDichVu(id);
         }
     });
 }

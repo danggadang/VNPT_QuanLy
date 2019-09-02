@@ -3,8 +3,8 @@
     <script type="text/javascript">try { ace.settings.loadState('sidebar') } catch (e) { }</script>
 
     <ul class="nav nav-list">
-        <li class="active" id="loaikhoahoc">
-            <a href="@Url.Content("~/User/Index")">
+        <li class="active" id="trangChu" active>
+            <a href="@Url.Content("~/Home/Index")">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"> Trang chủ</span>
             </a>
@@ -12,7 +12,7 @@
         </li>
         @if (Session["GroupID"].ToString() == "1")
         {
-            <li class="" id="khoahoc">
+            <li class="" id="quanLy" active>
                 <a href="@Url.Content("~/QuanLy/Index")">
                     <i class="menu-icon fa fa-user"></i>
                     <span class="menu-text"> Quản lý</span>
@@ -22,7 +22,7 @@
         }
         @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
-            <li class="" id="khoahoc">
+            <li class="" id="nhanVien">
                 <a href="@Url.Content("~/NhanVien/Index")">
                     <i class="menu-icon fa fa-users"></i>
                     <span class="menu-text"> Nhân viên</span>
@@ -32,7 +32,7 @@
         }
         @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
-            <li class="" id="khoahoc">
+            <li class="" id="khachHang">
                 <a href="@Url.Content("~/KhachHang/Index")">
                     <i class="menu-icon fa fa-users"></i>
                     <span class="menu-text"> Khách hàng</span>
@@ -42,7 +42,7 @@
         }
         @if (Session["GroupID"].ToString() == "1")
         {
-            <li class="" id="giangvien">
+            <li class="" id="dichVu">
                 <a href="@Url.Content("~/DichVu/Index")">
                     <i class=" menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Dịch vụ</span>
@@ -52,8 +52,8 @@
         }
         @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
-            <li class="" id="taikhoan">
-                <a href="@Url.Content("#")">
+            <li class="" id="loaiDichVu">
+                <a href="@Url.Content("~/DichVuGroup/Index")">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Loại dịch vụ</span>
                 </a>
@@ -62,7 +62,7 @@
         }
         @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
-            <li class="" id="taikhoan">
+            <li class="" id="baoCao">
                 <a href="@Url.Content("#")">
                     <i class="menu-icon fa fa-file-text"></i>
                     <span class="menu-text">Báo cáo</span>

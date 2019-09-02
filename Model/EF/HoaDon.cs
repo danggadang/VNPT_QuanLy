@@ -9,35 +9,23 @@ namespace Model.EF
     [Table("HoaDon")]
     public partial class HoaDon
     {
+        [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
-        [StringLength(250)]
-        public string MaKH { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IDHoaDon { get; set; }
 
-        public long? SoLuong { get; set; }
+        public int? IDDichVu { get; set; }
 
-        [StringLength(250)]
-        public string TenKH { get; set; }
-
-        [StringLength(250)]
-        public string SDT { get; set; }
-
-        [StringLength(50)]
-        public string DiaChi { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal? TongTienDV { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal? GiamGia { get; set; }
+        public int? SoLuong { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? TongTien { get; set; }
 
-        [StringLength(250)]
-        public string IDNhanVien { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? NgayXuLy { get; set; }
+        public int? IDNhanVien { get; set; }
     }
 }

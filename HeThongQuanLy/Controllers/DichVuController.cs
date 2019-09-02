@@ -17,20 +17,25 @@ namespace HeThongQuanLy.Controllers
         [HttpGet]
         public JsonResult LoadDichVu()
         {
-            var ds = db.DichVus.ToList();
-            return Json(new { data = ds }, JsonRequestBehavior.AllowGet);
+            var dv = db.DichVus.ToList();
+            var ndv = db.NhomDVs.ToList();
+            return Json(new { data = dv, data1 = ndv }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost, ValidateInput(false)]
         public JsonResult AddDichVu()
         {
             var name = Request.Form["TenDichVu"].ToString();
+            var soTien = Request.Form["SoTien"].ToString();
+            var idNhomDichVu = Request.Form["idNhomDichVu"].ToString();
 
             DichVu dv = new DichVu();
             dv.TenDV = name;
+            dv.SoTien = int.Parse(soTien);
+            dv.IDNhomDV = int.Parse(idNhomDichVu);
             dv.TrangThai = true;
             dv.NgayTao = DateTime.Now;
-
+  
             db.DichVus.Add(dv);
             db.SaveChanges();
             return Json(new { data = true });
@@ -41,18 +46,13 @@ namespace HeThongQuanLy.Controllers
         {
             var id = int.Parse(Request.Form["ID"].ToString());
             var name = Request.Form["TenDichVu"].ToString();
-            var trangThai = Request.Form["TrangThai"].ToString();
+            var soTien = Request.Form["SoTien"].ToString();
+            var idNhomDichVu = Request.Form["idNhomDichVu"].ToString();
 
             DichVu dv = db.DichVus.SingleOrDefault(x => x.ID == id);
             dv.TenDV = name;
-            if (trangThai == "1")
-            {
-                dv.TrangThai = true;
-            }
-            else
-            {
-                dv.TrangThai = false;
-            }
+            dv.SoTien = int.Parse(soTien);
+            dv.IDNhomDV = int.Parse(idNhomDichVu);
             dv.NgaySua = DateTime.Now;
 
             db.SaveChanges();
@@ -98,6 +98,13 @@ namespace HeThongQuanLy.Controllers
             dv.TrangThai = !dv.TrangThai;
             db.SaveChanges();
             return Json(new { data = true });
+        }
+        public JsonResult LoadNhomDichVu(int id)
+        {
+            var list = db.NhomDVs.ToList();
+            var iD = id;
+            return Json(new { data = list, data1 = iD }, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

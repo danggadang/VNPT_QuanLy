@@ -27,8 +27,7 @@ namespace Model.EF
 
         public DateTime? NgaySua { get; set; }
 
-        [StringLength(100)]
-        public string TrangThai { get; set; }
+        public int? TrangThai { get; set; }
 
         public int? IDNhanVien { get; set; }
     }

@@ -2,25 +2,19 @@
     $.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';
     $.fn.modal.prototype.constructor.Constructor.DEFAULTS.keyboard = false;
     $("#dtable").DataTable({
+
         ajax: {
             dataType: 'json',
-            type: 'get',//server side only works well with type "POST" !!!
-            url: '/QuanLy/LoadQuanLy',
+            type: 'get',
+            url: '/DichVuGroup/LoadDichVuGroup',
         },
         columns: [
-            { data: 'TenNV', name: 'TenNV' },           
-            { data: 'Mail', name: 'Mail' },
-            { data: 'GioiTinh', name: 'GioiTinh' },
             {
-                'sortable': false,
-                'searchable': false,
-                data: 'Anh', render: function (data) {
-                    return ` <img src="../../Images/${data}" style="width:100px; height:100px"/>`;
-                }
+                data: 'TenNhom'              
             },
             {
-                'sortable': false,
-                'searchable': false,
+                sortable: false,
+                searchable:false,
                 data: 'ID', render: function (data) {
                     return `
 
@@ -31,9 +25,19 @@
                 }
             }
 
-        ]
+        ],
     });
 });
+function Status(id) {
+    $.ajax({
+        url: "/DichVuGroupGroup/Status",
+        type: "post",
+        data: { id: id },
+        success: function (data) {
+            $('#dtable').DataTable().ajax.reload();
+        }
+    })
+}
 function Save(id) {
     if (id == 0) {
         Create();
@@ -43,27 +47,20 @@ function Save(id) {
     }
 }
 function Create() {
-    var gioiTinh = $('input[name=rdGioiTinh]:checked', '#frmAddEdit').val();
-    console.log(gioiTinh);
+
     var data = new FormData();
-    var files = $("#iImage").get(0).files;
-    data.append("Anh", files[0]);
-    data.append("TenDangNhap", $('#iUserName').val());
-    data.append("MatKhau", $('#iPassword').val());
-    data.append("Ten", $('#iName').val());
-    data.append("Mail", $('#iMail').val());
-    data.append("GioiTinh", gioiTinh);
+    data.append("TenDichVuGroup", $('#iTenDichVuGroup').val());
     $.ajax({
-        url: '/QuanLy/AddQuanLy',
+        url: '/DichVuGroup/AddDichVuGroup',
         type: 'POST',
         data: data,
         dataType: false,
         contentType: false,
         processData: false,
         success: function (data) {
-            swal("Thêm quản lý thành công!", "success");
+            swal("Thêm thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
-            $('#AddandEditQuanLyModal').modal('hide');
+            $('#AddandEditDichVuGroupModal').modal('hide');
         },
         error: function (xhr, ajaxOptions, thrownError) {
             swal("Oh no!!", thrownError, "error");
@@ -71,27 +68,28 @@ function Create() {
     });
 }
 function Edit() {
-    var gioiTinh = $('input[name=rdGioiTinh]:checked', '#frmAddEdit').val();
+    var trangThai;
+    if ($('#tTrangThai').is(":checked")) {
+        trangThai = 1;
+    }
+    else {
+        trangThai = 0;
+    }
     var data = new FormData();
-    var files = $("#iImage").get(0).files;
-    data.append("Anh", files[0]);
     data.append("ID", $('#iID').val());
-    data.append("TenDangNhap", $('#iUserName').val());
-    data.append("MatKhau", $('#iPassword').val());
-    data.append("Ten", $('#iName').val());
-    data.append("Mail", $('#iMail').val());
-    data.append("GioiTinh", gioiTinh);
+    data.append("TenDichVuGroup", $('#iTenDichVuGroup').val());
+    data.append("TrangThai", trangThai);
     $.ajax({
-        url: '/QuanLy/EditQuanLy',
+        url: '/DichVuGroup/EditDichVuGroup',
         type: 'POST',
         data: data,
         dataType: false,
         contentType: false,
         processData: false,
         success: function (data) {
-            swal("Sửa quản lý thành công!", "success");
+            swal("Thêm thành công!", "success");
             $('#dtable').DataTable().ajax.reload();
-            $('#AddandEditQuanLyModal').modal('hide');
+            $('#AddandEditDichVuGroupModal').modal('hide');
         },
         error: function (xhr, ajaxOptions, thrownError) {
             swal("Oh no!!", thrownError, "error");
@@ -100,12 +98,12 @@ function Edit() {
 }
 function Delete(id) {
     $.ajax({
-        url: '/QuanLy/DeleteQuanLy',
+        url: '/DichVuGroup/DeleteDichVuGroup',
         dataType: 'json',
         data: { id: id },
         type: 'POST',
         success: function (data) {
-            swal("Yes!!", "Xóa thành công!", "success")
+            swal("Yes!!", "Xóa   thành công!", "success")
             $('#dtable').DataTable().ajax.reload();
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -113,8 +111,8 @@ function Delete(id) {
         }
     });
 }
+
 function ReadImage(input) {
-    console.log('dadoc');
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -126,12 +124,12 @@ function ReadImage(input) {
 }
 function fnShowModal(id) {
     $.ajax({
-        url: '/QuanLy/AddandEditQuanLyModal',
+        url: '/DichVuGroup/AddandEditDichVuGroupModal',
         data: { id: id },
         type: 'POST',
         success: function (data) {
             $('#containershow1').html(data);
-            $('#AddandEditQuanLyModal').modal('show');
+            $('#AddandEditDichVuGroupModal').modal('show');
         }
     });
 }

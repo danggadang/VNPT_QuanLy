@@ -9,15 +9,18 @@
         },
         columns: [
             { data: 'TenNV', name: 'TenNV' },
-
             { data: 'Mail', name: 'Mail' },
             { data: 'GioiTinh', name: 'GioiTinh' },
             {
+                'sortable': false,
+                'searchable': false,
                 data: 'Anh', render: function (data) {
                     return ` <img src="../../Images/${data}" style="width:100px; height:100px"/>`;
                 }
             },
             {
+                'sortable': false,
+                'searchable': false,
                 data: 'ID', render: function (data) {
                     return `
 

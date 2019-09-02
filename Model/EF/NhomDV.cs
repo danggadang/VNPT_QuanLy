@@ -9,12 +9,9 @@ namespace Model.EF
     [Table("NhomDV")]
     public partial class NhomDV
     {
-        [StringLength(250)]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [StringLength(250)]
         public string TenNhom { get; set; }
-
-        public bool? DaXoa { get; set; }
     }
 }
