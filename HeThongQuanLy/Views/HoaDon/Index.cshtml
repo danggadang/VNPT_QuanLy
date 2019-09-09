@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Hóa đơn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Bảng hóa đơn</h3>
+                </div>
+                <div class="box-body">
+                    <table id="dtable" class="table table-bordered table-striped" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Khách hàng</th>
+                                <th>Nhân viên</th>
+                                <th>Dịch vụ</th>
+                                <th>Số lượng</th>
+                                <th>Tổng tiền</th>
+                                <th><button type="button" onclick="fnShowModal('0')" class="btn btn-success">Thêm</button></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+<div id="testPrint" style="font-size:16px;font-family:'Times New Roman';visibility:hidden">
+    <p style="text-align:center">
+        Kèm theo hợp đồng số: 2600/VNPT-LĐ-TTKD-IVAN/HĐDV ký kết ngày 13 tháng 10 năm 2017 giữa<br />
+        <b class="name"></b><b> và TRUNG TÂM KINH DOANH VNPT-LÂM ĐỒNG</b>
+    </p>
+    <p>Hôm nay, ngày 13 tháng 10 năm 2017, Chúng tôi gồm có:</p>
+    <p>Bên A: <b class="name"></b></p>
+    <p>Địa chỉ giao dịch : <em id="address"></em></p>
+    <p>Điện thoại&emsp;&emsp;&emsp;: <em id="phone"></em></p>
+    <p>Email&emsp;&emsp;&emsp;&emsp;&emsp;: <em id="mail"></em></p>
+    <p><b>Bên B: TRUNG TÂM KINH DOANH VNPT- LÂM ĐỒNG</b></p>
+    <p>Người đại diện&emsp;: <b>Trần Xuân Nghĩa</b></p>
+    <p>Địa chỉ&emsp;&emsp;&emsp;&emsp;   : 08 Trần Phú, Phường 3, Đà Lạt, Lâm Đồng</p>
+    <p>Điện thoại&emsp;&emsp;&emsp;: 063.3824169</p>
+    <p>Tài khoản số&emsp;  : 110000123014 tại Ngân Hàng Công Thương tỉnh Lâm Đồng </p>
+    <p>Mã số thuế&emsp;&emsp;: 0106869738-036</p>
+    <p>
+        Sau khi bàn bạc, thảo luận hai bên đồng ý và thống nhất ký kết phụ lục bổ sung  Hợp đồng số:
+        2600/VNPT-LĐ-TTKD-IVAN/HĐDV ngày 13/10/2017 với gói cước như sau:
+    </p>
+    <table style="align-content:center">
+        <tr>
+            <th><b>Bên A đăng ký sử dụng</b></th>
+            <th>Giá tiền</th>
+        </tr>
+        <tr>
+            <td id="service"></td>
+            <td id="cost"></td>
+        </tr>
+    </table>
+    <p>
+        -Các điều khoản khác không nêu trong phụ lục này vẫn được áp dụng theo hợp đồng số
+        2600/VNPT-LĐ-TTKD/HĐDV ngày 13 tháng 10 năm 2017 và  có hiệu lực đến ngày 13/10/2021
+    </p>
+    <p>-Phụ lục này có hiệu lực 48 tháng kể từ ngày ký và gia hạn tiếp  bằng văn bản nếu được sự đồng ý của cả hai bên. </p>
+    <p>-Phụ lục được lập thành 02 (hai) bản, Bên A giữ 01 (một) bản, Bên B giữ 01 (một) bản và có giá trị pháp lý như nhau.</p>
+
+</div>
+@RenderPage("ChiTiet.cshtml")
+
+@section scripts{
+    <script src="~/Scripts/js_BackEnd/HoaDon.js"></script>
+}
+

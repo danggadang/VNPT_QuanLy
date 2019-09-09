@@ -15,6 +15,7 @@ namespace Model.EF
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual DbSet<ChiTieu> ChiTieux { get; set; }
         public virtual DbSet<DichVu> DichVus { get; set; }
+        public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<NhanVien_KhachHang> NhanVien_KhachHang { get; set; }
@@ -23,20 +24,11 @@ namespace Model.EF
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TrangThai> TrangThais { get; set; }
         public virtual DbSet<TrangThaiHopDong> TrangThaiHopDongs { get; set; }
-        public virtual DbSet<HoaDon> HoaDons { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ChiTietHoaDon>()
-                .Property(e => e.TongTien)
-                .HasPrecision(19, 4);
-
             modelBuilder.Entity<ChiTieu>()
                 .Property(e => e.DoanhThu)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<HoaDon>()
-                .Property(e => e.TongTien)
                 .HasPrecision(19, 4);
         }
     }

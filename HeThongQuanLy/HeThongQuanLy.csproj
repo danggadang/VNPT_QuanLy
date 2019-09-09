@@ -141,6 +141,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DichVuController.cs" />
     <Compile Include="Controllers\DichVuGroupController.cs" />
+    <Compile Include="Controllers\HoaDonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -864,6 +865,7 @@
     <Content Include="Scripts\js_BackEnd\DichVu.js" />
     <Content Include="Scripts\js_BackEnd\DichVuGroup.js" />
     <Content Include="Scripts\js_BackEnd\Form.js" />
+    <Content Include="Scripts\js_BackEnd\HoaDon.js" />
     <Content Include="Scripts\js_BackEnd\KhachHang.js" />
     <Content Include="Scripts\js_BackEnd\Layout.js" />
     <Content Include="Scripts\js_BackEnd\Loading\.gitignore" />
@@ -920,12 +922,14 @@
     <Content Include="Views\Khachhang\EditTrangThaiModal.cshtml" />
     <Content Include="Views\DichVuGroup\Index.cshtml" />
     <Content Include="Views\DichVuGroup\AddandEditDichVuGroupModal.cshtml" />
+    <Content Include="Views\HoaDon\Index.cshtml" />
+    <Content Include="Views\HoaDon\AddandEditHoaDonModal.cshtml" />
+    <Content Include="Views\HoaDon\ChiTiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\js_BackEnd\Loading\.idea\markdown-navigator\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\HoaDon\" />
     <Folder Include="Views\HopDong\" />
     <Folder Include="Views\Info\" />
     <Folder Include="Views\SanPham\" />

@@ -9,7 +9,6 @@ namespace Model.EF
     [Table("ChiTietHoaDon")]
     public partial class ChiTietHoaDon
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         public int? MaKH { get; set; }
@@ -26,13 +25,14 @@ namespace Model.EF
         [StringLength(100)]
         public string Mail { get; set; }
 
+        public int? IDDV { get; set; }
+
         [StringLength(250)]
         public string TenDV { get; set; }
 
         public int? SoLuong { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? TongTien { get; set; }
+        public int? TongTien { get; set; }
 
         public int? IDNhanVien { get; set; }
 

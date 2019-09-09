@@ -3,35 +3,35 @@
     ViewBag.Title = "Khách hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }<button type="button" onclick="printData()" class="btn btn-success">test</button>
-        <div class="content" id="test">
+<div class="content" id="test">
             
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Bảng khách hàng</h3>
-                        </div>
-                        <div class="box-body">
-                            <table id="dtable" class="table table-bordered table-striped" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Tên khách hàng</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Mail</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Trạng thái</th>
-                                        <th>Nhân viên</th>
-                                        <th><button type="button" onclick="fnShowModal('0')" class="btn btn-success">Thêm</button></th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Bảng khách hàng</h3>
+                </div>
+                <div class="box-body">
+                    <table id="dtable" class="table table-bordered table-striped" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Tên khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Mail</th>
+                                <th>Địa chỉ</th>
+                                <th>Trạng thái</th>
+                                <th>Nhân viên</th>
+                                <th><button type="button" onclick="fnShowModal('0')" class="btn btn-success">Thêm</button></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
-        @RenderPage("EditTrangThaiModal.cshtml")
+    </div>
+</div>
+@RenderPage("EditTrangThaiModal.cshtml")
 
-        @section scripts{
-            <script src="~/Scripts/js_BackEnd/KhachHang.js"></script>
-        }
+@section scripts{
+    <script src="~/Scripts/js_BackEnd/KhachHang.js"></script>
+}

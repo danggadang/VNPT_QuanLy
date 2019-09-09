@@ -28,7 +28,6 @@ namespace HeThongQuanLy.Controllers
 
             NhomDV dv = new NhomDV();
             dv.TenNhom = name;
-            dv.TrangThai = true;
 
             db.NhomDVs.Add(dv);
             db.SaveChanges();
@@ -40,18 +39,10 @@ namespace HeThongQuanLy.Controllers
         {
             var id = int.Parse(Request.Form["ID"].ToString());
             var name = Request.Form["TenDichVuGroup"].ToString();
-            var trangThai = Request.Form["trangThai"].ToString();
 
             NhomDV dv = new NhomDV();
             dv.TenNhom = name;
-            if (trangThai == "True")
-            {
-                dv.TrangThai = true;
-            }
-            else
-            {
-                dv.TrangThai = false;
-            }
+          
                 
             db.NhomDVs.Add(dv);
             db.SaveChanges();
@@ -88,15 +79,6 @@ namespace HeThongQuanLy.Controllers
             ViewData["Mode"] = mode;
             ViewData["Obj"] = result;
             return View();
-        }
-        [HttpPost]
-        public JsonResult Status(int id)
-        {
-            var dv = db.NhomDVs.Single(z => z.ID == id);
-
-            dv.TrangThai = !dv.TrangThai;
-            db.SaveChanges();
-            return Json(new { data = true });
         }
     }
 }

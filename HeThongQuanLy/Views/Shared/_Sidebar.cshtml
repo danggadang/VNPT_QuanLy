@@ -60,6 +60,16 @@
                 <b class="arrow"></b>
             </li>
         }
+        @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2"|| Session["GroupID"].ToString() == "3")
+        {
+            <li class="" id="baoCao">
+                <a href="@Url.Content("~/HoaDon/Index")">
+                    <i class="menu-icon fa fa-file-text"></i>
+                    <span class="menu-text">Hóa đơn</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        }
         @if (Session["GroupID"].ToString() == "1" || Session["GroupID"].ToString() == "2")
         {
             <li class="" id="baoCao">
