@@ -113,8 +113,7 @@ namespace HeThongQuanLy.Controllers
         public JsonResult LoadNhanVien(int id)
         {
             var list = db.NhanViens.Where(x => x.IDNhom == 3).ToList();
-            var iD = id;
-            return Json(new { data = list,data1=iD }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = list,data1=id }, JsonRequestBehavior.AllowGet);
 
         }
     }

@@ -6,24 +6,43 @@
     var id = Session["ID"];
 }
 
-<div style="float:left;margin-right:100px;margin-bottom:auto"><img src="~/Images/@info.Anh" width="200" height="200" style="border-style: hidden;" /></div>
-<div style="font-size:18px;float:left">
-    <p>Tên nhân viên: @info.TenNV</p>
-
-    @if (info.GioiTinh == "Nam")
-    {
-        <p>Giới tính: Nam</p>
-    }
-    else
-    {
-        <p>Giới tính: Nữ</p>
-    }
-
-    <p>Mail:@info.Mail</p><br />
-    <button type="button" class="btn btn-primary" onclick="ShowEditModal(@id)">Chỉnh sửa</button>
+<div class="col-xs-12 col-sm-3 center">
+    <span class="profile-picture">
+        <img src="~/Images/@info.Anh" class="editable img-responsive" />
+    </span>
 </div>
-
-@section scripts{
-    <script src="~/Scripts/js_BackEnd/User.js"></script>
-}
+<div class="col-xs-12 col-sm-9">
+    <div class="profile-user-info" >
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Tên nhân viên </div>
+            <div class="profile-info-value">
+                <span id="infoKhachHang">@info.TenNV</span>
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Giới tính </div>
+            <div class="profile-info-value">
+                @if (info.GioiTinh == "Nam")
+                {
+                    <span id="">Nam</span>
+                }
+                else
+                {
+                    <span id="">Nữ</span>
+                }
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Mail </div>
+            <div class="profile-info-value">
+                <span id="infoKhachHang">@info.Mail</span>
+            </div>
+        </div>
+    </div>
+    <div class="space-20"></div>
+    <button type="button" class="btn btn-primary btn-app btn-sm" onclick="ShowEditModal(@id)">Chỉnh sửa</button>
+</div>
+    @section scripts{
+        <script src="~/Scripts/js_BackEnd/User.js"></script>
+    }
 

@@ -4,7 +4,7 @@
         $("#dtable").DataTable({
             ajax: {
                 dataType: 'json',
-                type: 'get',//server side only works well with type "POST" !!!
+                type: 'get',
                 url: '/KhachHang/LoadKhachHang',
                 dataSrc: function (json) {
                     for (var i = 0; i < json.data.length; i++) {
@@ -72,17 +72,15 @@ function LoadNhanVien(id) {
         data: {id:id},
         success: function (data) {
             html = "";
-            debugger;
-            idNhanVien = data.data1;
+            idKhachHang = data.data1;
             $.each(data.data, function (i, row) {
-                if (row.ID == idNhanVien) {
+                if (row.ID == idKhachHang) {
                     html += `<option value="` + row.ID + `" class="oNhanVien" selected>` + row.TenNV + `</option>`;
                 }
                 else {
                     html += `<option value="` + row.ID + `" class="oNhanVien">` + row.TenNV + `</option>`;
-                }               
-            })    
-            
+                }
+            })  
             $('#sNhanVien').html(html);
         }
     });

@@ -28,7 +28,7 @@ namespace HeThongQuanLy.Controllers
         {
             var hd = db.HoaDons.Where(x => x.ID == id).ToList();
             var kh = db.KhachHangs.ToList();
-            var dv = db.DichVus.ToList();
+            var dv = db.DichVus.Where(x => x.TrangThai == true).ToList();
             var nv = db.NhanViens.Where(x => x.IDNhom == 3).ToList();
             return Json(new { data = hd, data1 = kh, data2 = dv, data3 = nv }, JsonRequestBehavior.AllowGet);
         }
@@ -37,19 +37,18 @@ namespace HeThongQuanLy.Controllers
         public JsonResult AddHoaDon()
         {
             var soLuong = int.Parse(Request.Form["SoLuong"].ToString());
-            var idNhanVien = int.Parse(Request.Form["idNhanVien"].ToString());
             var idKhachHang = int.Parse(Request.Form["idKhachHang"].ToString());
             var idDichVu = int.Parse(Request.Form["idDichVu"].ToString());
 
             var giaTien = db.DichVus.SingleOrDefault(x => x.ID == idDichVu).SoTien;
-            var nhanVien = db.NhanViens.SingleOrDefault(x => x.ID == idNhanVien);
             var dichVu = db.DichVus.SingleOrDefault(x => x.ID == idDichVu);
             var khachHang = db.KhachHangs.SingleOrDefault(x => x.ID == idKhachHang);
+            var nhanVien = db.NhanViens.SingleOrDefault(x => x.ID == khachHang.IDNhanVien);
 
             HoaDon dv = new HoaDon();
             var tongTien = giaTien * soLuong;
             dv.IDDichVu = idDichVu;
-            dv.IDNhanVien = idNhanVien;
+            dv.IDNhanVien = nhanVien.ID;
             dv.IDKhachHang = idKhachHang;
             dv.SoLuong = soLuong;
             dv.TongTien = int.Parse(tongTien.ToString());
@@ -60,7 +59,7 @@ namespace HeThongQuanLy.Controllers
             ct.SDT = khachHang.SoDienThoai;
             ct.DiaChi = khachHang.DiaChi;
             ct.IDDV = idDichVu;
-            ct.IDNhanVien = idNhanVien;
+            ct.IDNhanVien = nhanVien.ID;
             ct.TongTien = int.Parse(tongTien.ToString());
             ct.SoLuong = soLuong;
             ct.Mail = khachHang.Mail;            
@@ -79,19 +78,18 @@ namespace HeThongQuanLy.Controllers
         {
             var id = int.Parse(Request.Form["ID"].ToString());
             var soLuong = int.Parse(Request.Form["SoLuong"].ToString());
-            var idNhanVien = int.Parse(Request.Form["idNhanVien"].ToString());
             var idKhachHang = int.Parse(Request.Form["idKhachHang"].ToString());
             var idDichVu = int.Parse(Request.Form["idDichVu"].ToString());
 
-            var giaTien = db.DichVus.SingleOrDefault(x => x.ID == idDichVu).SoTien;
-            var nhanVien = db.NhanViens.SingleOrDefault(x => x.ID == idNhanVien);
+            var giaTien = db.DichVus.SingleOrDefault(x => x.ID == idDichVu).SoTien;            
             var dichVu = db.DichVus.SingleOrDefault(x => x.ID == idDichVu);
             var khachHang = db.KhachHangs.SingleOrDefault(x => x.ID == idKhachHang);
+            var nhanVien = db.NhanViens.SingleOrDefault(x => x.ID == khachHang.IDNhanVien);
 
             HoaDon dv = db.HoaDons.SingleOrDefault(x => x.ID == id);
             var tongTien = giaTien * soLuong;
             dv.IDDichVu = idDichVu;
-            dv.IDNhanVien = idNhanVien;
+            dv.IDNhanVien = nhanVien.ID;
             dv.IDKhachHang = idKhachHang;
             dv.SoLuong = soLuong;
             dv.TongTien = int.Parse(tongTien.ToString());
@@ -102,7 +100,7 @@ namespace HeThongQuanLy.Controllers
             ct.SDT = khachHang.SoDienThoai;
             ct.DiaChi = khachHang.DiaChi;
             ct.IDDV = idDichVu;
-            ct.IDNhanVien = idNhanVien;
+            ct.IDNhanVien = nhanVien.ID;
             ct.TongTien = int.Parse(tongTien.ToString());
             ct.SoLuong = soLuong;
             ct.Mail = khachHang.Mail;

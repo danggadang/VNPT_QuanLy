@@ -105,7 +105,6 @@ function LoadThongTin(id) {
         success: function (data) {
             html1 = "";
             html2 = "";
-            html3 = "";
             idKhachHang = data.data["IDKhachHang"];
             idDichVu = data.data["IDDichVu"];
             idNhanVien = data.data["IDNhanVien"];
@@ -125,17 +124,8 @@ function LoadThongTin(id) {
                     html2 += `<option value="` + row.ID + `" class="oDichVu">` + row.TenDV + `</option>`;
                 }
             })
-            $.each(data.data3, function (i, row) {
-                if (row.ID == idNhanVien) {
-                    html3 += `<option value="` + row.ID + `" class="oNhanVien" selected>` + row.TenNV + `</option>`;
-                }
-                else {
-                    html3 += `<option value="` + row.ID + `" class="oNhanVien">` + row.TenNV + `</option>`;
-                }
-            })
             $('#sKhachHang').html(html1);
             $('#sDichVu').html(html2);
-            $('#sNhanVien').html(html3);
         }
     });
 }
@@ -149,12 +139,10 @@ function Save(id) {
 }
 
 function Create() {
-    idNhanVien = $("#sNhanVien option:selected").val();
     idKhachHang = $("#sKhachHang option:selected").val();
     idDichVu = $("#sDichVu option:selected").val();
     var data = new FormData();
     data.append("SoLuong", $('#iSoLuong').val());
-    data.append("idNhanVien", idNhanVien);
     data.append("idKhachHang", idKhachHang);
     data.append("idDichVu", idDichVu);
     $.ajax({
@@ -175,13 +163,11 @@ function Create() {
     });
 }
 function Edit() {
-    idNhanVien = $("#sNhanVien option:selected").val();
     idKhachHang = $("#sKhachHang option:selected").val();
     idDichVu = $("#sDichVu option:selected").val();
     var data = new FormData();
     data.append("ID", $('#iID').val());
     data.append("SoLuong", $('#iSoLuong').val());
-    data.append("idNhanVien", idNhanVien);
     data.append("idKhachHang", idKhachHang);
     data.append("idDichVu", idDichVu);
     $.ajax({
@@ -256,6 +242,7 @@ function printData(id) {
         type: 'GET',
         data: {id:id},
         success: function (data) {
+            $("#table").css("border", "1px solid black");
             $('.name').html(data.data["TenKH"]);
             $('#address').html(data.data["DiaChi"]);
             $('#phone').html(data.data["SDT"]);

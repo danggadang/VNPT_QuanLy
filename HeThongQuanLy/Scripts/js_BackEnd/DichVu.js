@@ -73,9 +73,9 @@ function LoadNhomDichVu(id) {
         data: { id: id },
         success: function (data) {
             html = "";
-            idNhomDichVu = data.data1;
+            idDichVu = data.data1;
             $.each(data.data, function (i, row) {
-                if (row.ID == idNhomDichVu) {
+                if (row.ID == idDichVu) {
                     html += `<option value="` + row.ID + `" class="oNhanVien" selected>` + row.TenNhom + `</option>`;
                 }
                 else {
